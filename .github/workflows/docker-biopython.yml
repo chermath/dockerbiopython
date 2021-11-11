@@ -12,7 +12,7 @@ on:
 
 jobs:
   weekend_offline_task:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     name: Weekend offline task
     steps:
       - name: Do action
