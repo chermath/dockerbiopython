@@ -27,11 +27,11 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: wei/git-sync@v3
+        # uses: wei/git-sync@v3
         # uses: actions/checkout@v2
         with:
           source_repo: https://github.com/biopython/biopython
-          source_branch: "main"
+          # source_branch: "main"
       - name: Test biopython
         run: |
            cd biopython >> $GITHUB_ENV
