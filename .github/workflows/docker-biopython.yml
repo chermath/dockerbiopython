@@ -49,6 +49,10 @@ jobs:
         with:
           push: true
           tags: matich/weekend_offline_task:latest
+      -
+       name: Docker push
+       run: |
+          docker push matich/weekend_offline_task:latest
 #         with:
 #            - name: Clone repository
 #              run: |
