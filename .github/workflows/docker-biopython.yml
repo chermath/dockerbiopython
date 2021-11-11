@@ -21,11 +21,11 @@ jobs:
       -
         name: Get docker container
         run: |
-          docker pull matich/weekend_offline_task:prepared_with_dev
+          docker pull matich/weekend_offline_task:prepared_tests
       - 
         name: Run container
         run: |
-          docker run matich/weekend_offline_task:prepared_with_dev
+          docker run matich/weekend_offline_task:prepared_tests
       -
         name: Build container
         id: docker_build
