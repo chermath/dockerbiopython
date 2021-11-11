@@ -9,31 +9,31 @@ jobs:
   weekend_offline_task:
     runs-on: ubuntu-latest
     
-    name: Weekend offline task
+    name: weekend offline task
     steps:
       -
-        name: Docker login
+        name: docker login
         env:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
           docker login -u $username -p $password
       -
-        name: Get docker container
+        name: get docker container
         run: |
           docker pull matich/weekend_offline_task:prepared_tests
       - 
-        name: Run container
+        name: run container
         run: |
           docker run matich/weekend_offline_task:prepared_tests
       -
-        name: Build container
+        name: build container
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: matich/weekend_offline_task:biopython
       -
-       name: Docker hub push
+       name: docker hub push
        run: |
           docker push matich/weekend_offline_task:biopython
