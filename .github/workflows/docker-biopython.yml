@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Do action
         id: hello
-        uses: chermath/dockerbiopython@v1
+        uses: chermath/dockerbiopython@latest
       - name: Clone repository
         # uses: wei/git-sync@v3
         #uses: actions/checkout@v2
