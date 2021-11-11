@@ -8,26 +8,42 @@ on:
 jobs:
   weekend_offline_task:
     runs-on: ubuntu-latest
-    container: docker://matich/weekend_offline_task:prepared_with_dev
+    
     name: Weekend offline task
     steps:
-      - name: Clone repository
+      -
+        name: Docker login
+        env:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}'
+        run: |
+          docker login -u $username -p $password
+      -
+        name: Get docker container
+        run: |
+          docker pull matich/weekend_offline_task:prepared_with_dev
+      - 
+        name: Clone repository
         run: |
           git clone https://github.com/biopython/biopython
-      - name: Build biopython
+      - 
+        name: Build biopython
         run: |
            cd biopython
            python3.9 setup.py build
-      - name: Test biopython
+      - 
+        name: Test biopython
         run: |
            cd biopython
            python3.9 setup.py test --offline
-      - name: Login to DockerHub
+      - 
+        name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - 
+        name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
