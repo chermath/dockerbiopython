@@ -8,7 +8,7 @@ on:
 jobs:
   weekend_offline_task:
     runs-on: ubuntu-latest
-    container: docker://matich/weekend_offline_task:prepared_with_git
+    container: docker://matich/weekend_offline_task:prepared_with_dev
     name: Weekend offline task
     steps:
 #       - name: Prepare image
