@@ -19,7 +19,7 @@ jobs:
       - name: Build biopython
         run: |
            cd biopython >> $GITHUB_ENV
-           python3 setup.py bild
+           python3 setup.py build
       - name: Test biopython
         run: |
            cd biopython >> $GITHUB_ENV
