@@ -1,52 +1,50 @@
 name: Docker
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
-     runs-on: docker://matich/weekend_offline_task:prepared
-     steps:
+  weekend_offline_task:
+    runs-on: ubuntu-latest
+    container: docker://matich/weekend_offline_task:prepared_with_dev
+    name: Weekend offline task
+    steps:
       - name: Clone repository
-        # uses: wei/git-sync@v3
-        #uses: actions/checkout@v2
         run: |
           git clone https://github.com/biopython/biopython
+      - name: Build biopython
+        run: |
+           cd biopython
+           python3.9 setup.py build
       - name: Test biopython
         run: |
-           cd biopython >> $GITHUB_ENV
-           /usr/bin/python3.9 setup.py test --offline >> $GITHUB_ENV
-      # Login against a Docker registry except on PR
-      # https://github.com/docker/login-action
-      #- name: Log into registry ${{ env.REGISTRY }}
-      #  if: github.event_name != 'pull_request'
-      #  uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-      #  with:
-      #    registry: ${{ env.REGISTRY }}
-      #    username: ${{ github.actor }}
-      #    password: ${{ secrets.GITHUB_TOKEN }}
-
-      # Extract metadata (tags, labels) for Docker
-      # https://github.com/docker/metadata-action
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+           cd biopython
+           python3.9 setup.py test --offline
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
         with:
-          context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          push: true
+          tags: matich/weekend_offline_task:latest
+#         with:
+#            - name: Clone repository
+#              run: |
+#                git clone https://github.com/biopython/biopython
+#            - name: Build biopython
+#              run: |
+#               cd biopython >> $GITHUB_ENV
+#               python3.9 setup.py build
+#            - name: Test biopython
+#              run: |
+#               cd biopython >> $GITHUB_ENV
+#               python3.9 setup.py test --offline >> $GITHUB_ENV
+
+#         # uses: chermath/dockerbiopython@v1
+      
