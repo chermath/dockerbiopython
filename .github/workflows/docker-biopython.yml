@@ -7,12 +7,12 @@ on:
 
 jobs:
   weekend_offline_task:
-    runs-on: ubuntu-latest
+    runs-on: chermath/dockerbiopython@v1
     name: Weekend offline task
     steps:
-      - name: Prepare image
-        id: hello
-        uses: chermath/dockerbiopython@v1
+#       - name: Prepare image
+#         id: hello
+#         uses: chermath/dockerbiopython@v1
       - name: Clone repository
         run: |
           git clone https://github.com/biopython/biopython
