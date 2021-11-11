@@ -8,20 +8,34 @@ on:
 jobs:
   weekend_offline_task:
     runs-on: ubuntu-latest
-    container: chermath/dockerbiopython@v1
     name: Weekend offline task
     steps:
-#        - name: Prepare image
-#          id: hello
-#          uses: chermath/dockerbiopython@v1
-       - name: Clone repository
-         run: |
+      - name: Prepare image
+        uses: docker://matich/weekend_offline_task:prepared
+        
+      - name: Clone repository
+        run: |
           git clone https://github.com/biopython/biopython
-       - name: Build biopython
-         run: |
+      - name: Build biopython
+        run: |
            cd biopython >> $GITHUB_ENV
            python3 setup.py build
-       - name: Test biopython
-         run: |
+      - name: Test biopython
+        run: |
            cd biopython >> $GITHUB_ENV
            python3 setup.py test --offline >> $GITHUB_ENV
+#         with:
+#            - name: Clone repository
+#              run: |
+#                git clone https://github.com/biopython/biopython
+#            - name: Build biopython
+#              run: |
+#               cd biopython >> $GITHUB_ENV
+#               python3.9 setup.py build
+#            - name: Test biopython
+#              run: |
+#               cd biopython >> $GITHUB_ENV
+#               python3.9 setup.py test --offline >> $GITHUB_ENV
+
+#         # uses: chermath/dockerbiopython@v1
+      
