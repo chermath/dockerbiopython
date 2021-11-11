@@ -8,10 +8,11 @@ on:
 jobs:
   weekend_offline_task:
     runs-on: ubuntu-latest
+    container: docker://matich/weekend_offline_task:prepared_with_numpy
     name: Weekend offline task
     steps:
-      - name: Prepare image
-        uses: docker://matich/weekend_offline_task:prepared_with_numpy
+#       - name: Prepare image
+#         uses: docker://matich/weekend_offline_task:prepared_with_numpy
       - name: Clone repository
         run: |
           git clone https://github.com/biopython/biopython
