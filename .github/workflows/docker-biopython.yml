@@ -26,7 +26,7 @@ jobs:
       - name: Test biopython
         run: |
            cd biopython >> $GITHUB_ENV
-           python3.9 setup.py test --offline >> $GITHUB_ENV
+           python3 setup.py test --offline >> $GITHUB_ENV
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       #- name: Log into registry ${{ env.REGISTRY }}
