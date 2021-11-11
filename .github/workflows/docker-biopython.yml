@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Clone repository
         # uses: wei/git-sync@v3
-        uses: actions/clone@v2
+        uses: actions/checkout@v2
         with:
           source_repo: https://github.com/biopython/biopython
           # source_branch: "main"
