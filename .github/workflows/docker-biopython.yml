@@ -17,12 +17,12 @@ jobs:
           git clone https://github.com/biopython/biopython
       - name: Build biopython
         run: |
-           cd biopython >> $GITHUB_ENV
-           python3 setup.py build
+           cd biopython
+           python3.9 setup.py build
       - name: Test biopython
         run: |
-           cd biopython >> $GITHUB_ENV
-           python3 setup.py test --offline >> $GITHUB_ENV
+           cd biopython
+           python3.9 setup.py test --offline
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
