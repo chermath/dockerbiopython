@@ -1,0 +1,5 @@
+name: 'weekend offline task'
+runs:
+        using: 'docker'
+        image: 'Dockerfile'
+
