@@ -23,6 +23,10 @@ jobs:
         #uses: actions/checkout@v2
         run: |
           git clone https://github.com/biopython/biopython
+      - name: Install biopython
+        run: |
+           cd biopython >> $GITHUB_ENV
+           python3 setup.py install
       - name: Test biopython
         run: |
            cd biopython >> $GITHUB_ENV
